@@ -2,7 +2,7 @@
 
 set -e
 
-image="k8s-1.9.3@sha256:ead8cbdf16e205acfe66ec4b03e31974217e07808da1d9127409337d4959ace7"
+image="k8s-1.9.3@sha256:20f9507d39949e8757c0505f95d0d277433a401f837a50834e862612f64e488d"
 
 source cluster/ephemeral-provider-common.sh
 
@@ -18,7 +18,7 @@ function up() {
 
     # Copy k8s config and kubectl
     scp ${OPTIONS} vagrant@$(_main_ip):/usr/bin/kubectl ${KUBEVIRT_PATH}cluster/$PROVIDER/.kubectl
-    chmod u+x cluster/vagrant-kubernetes/.kubectl
+    chmod u+x ${KUBEVIRT_PATH}cluster/$PROVIDER/.kubectl
     scp ${OPTIONS} vagrant@$(_main_ip):/etc/kubernetes/admin.conf ${KUBEVIRT_PATH}cluster/$PROVIDER/.kubeconfig
 
     # Set server and disable tls check
