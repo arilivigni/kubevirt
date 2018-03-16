@@ -297,6 +297,10 @@ func Convert_v1_VirtualMachine_To_api_Domain(vm *v1.VirtualMachine, domain *Doma
 	domain.ObjectMeta.Name = vm.ObjectMeta.Name
 	domain.ObjectMeta.Namespace = vm.ObjectMeta.Namespace
 
+	if val, ok := vm.Annotations["hack.kubevirt.io/emulate"]; ok && val == "true" {
+		domain.Spec.Type = "qemu"
+	}
+
 	// Spec metadata
 	domain.Spec.Metadata.KubeVirt.UID = vm.UID
 	if vm.Spec.TerminationGracePeriodSeconds != nil {

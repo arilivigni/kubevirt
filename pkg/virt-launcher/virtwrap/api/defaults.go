@@ -40,7 +40,10 @@ func SetDefaults_OSType(ostype *OSType) {
 
 func SetDefaults_DomainSpec(spec *DomainSpec) {
 	spec.XmlNS = "http://libvirt.org/schemas/domain/qemu/1.0"
-	spec.Type = "qemu"
+	if spec.Type == "" {
+		spec.Type = "kvm"
+	}
+	spec.Devices.Emulator = "/usr/bin/qemu-system-x86_64"
 }
 
 func SetDefaults_SysInfo(sysinfo *SysInfo) {
